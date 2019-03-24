@@ -11,12 +11,8 @@
 # run as: root user
 
 # ##############
-# Input data
-echo "get the latest (Linux) download version: https://www.wowza.com/pricing/installer"
-echo "example url: https://www.wowza.com/downloads/WowzaStreamingEngine-4-7-7/WowzaStreamingEngine-4.7.7-linux-x64-installer.run "
 
-read -p 'Wowza downloadlink (Linux): ' DownloadUrl
-FileName="${DownloadUrl##*/}"
+echo "Intall Wowza Streaming Engine 4.7.7"
 
 JavaUrl="https://vanmarion.nl/software/java/jdk-8u202-linux-x64.tar.gz"
 
@@ -76,8 +72,8 @@ sleep 2
 echo "time to download wowza"
 sleep 2
 cd /tmp
-wget $DownloadUrl
-chmod +x $FileName
+wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-7-7/WowzaStreamingEngine-4.7.7-linux-x64-installer.run
+chmod +x WowzaStreamingEngine-4.7.7-linux-x64-installer.run
 
 #run installer
 #clear
@@ -86,7 +82,7 @@ echo "You have to press ENTER several times to get through the License agreement
 echo "You also have to set a uername and password"
 echo "The installation starts in 5 seconds"
 sleep 5
-./$FileName
+./WowzaStreamingEngine-4.7.7-linux-x64-installer.run
 
 #agree to agreement by pressing enter multiple times 	| Press [Enter] to continue:
 # accept agreement										| Do you accept this agreement? [y/n]:

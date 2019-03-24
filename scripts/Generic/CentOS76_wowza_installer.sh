@@ -4,10 +4,10 @@
 # Author: J. van Marion / jeroen@vanmarion.nl
 # Version: 1.0
 
-# Wowza installer for Ubuntu 18.04
+# Generic Wowza installer for CentOS 7.6
 # Including: Java 8 Installation, Firewall CSF installation/configuration
 
-# filename: Ubuntu1804_wowza_installer.sh
+# filename: CentOS76_wowza_installer.sh
 # run as: root user
 
 # ##############
@@ -20,35 +20,38 @@ FileName="${DownloadUrl##*/}"
 
 JavaUrl="https://vanmarion.nl/software/java/jdk-8u202-linux-x64.tar.gz"
 
+# install necessary packages (wget, vim, perl, perl-Time-HiRes)
+yum install wget vim perl-libwww-perl.noarch perl-Time-HiRes  -y
+
 #update 
-clear
+#clear
 echo "update your system"
 sleep 2
 
-apt-get -y update && apt-get -y upgrade
+yum update -y
 
 #install java
-clear
+#clear
 echo "install java 8u202"
 sleep 2
 cd /tmp
 wget $JavaUrl
 
 tar -xzvf jdk-8u202-linux-x64.tar.gz
-rm -R /usr/lib/jvm/java-8-oracle 
+rm -Rf /usr/lib/jvm/java-8-oracle -y
 mkdir -p /usr/lib/jvm/java-8-oracle
 mv jdk1.8.0_202/* /usr/lib/jvm/java-8-oracle
 chown -R root:root /usr/lib/jvm/java-8-oracle
 
 #set java as default
-clear
+#clear
 echo "set java as default"
 sleep 2
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-oracle/jre/bin/java 1091
 sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-8-oracle/bin/javac 1091
 
 # create file for java and add content
-clear
+#clear
 echo "create file for java and add content and run the file"
 sleep 2
 echo "# add these lines to it, and save the file
@@ -62,14 +65,14 @@ export DERBY_HOME=/usr/lib/jvm/java-8-oracle/db" >> /etc/profile.d/jdk.sh
 source /etc/profile.d/jdk.sh
 
 #check java version
-clear
+#clear
 echo "the installed java version"
 java -version
 sleep 2
 
 #install Wowza
 #keep your license key ready. its needed in this installer
-clear
+#clear
 echo "time to download wowza"
 sleep 2
 cd /tmp
@@ -77,7 +80,7 @@ wget $DownloadUrl
 chmod +x $FileName
 
 #run installer
-clear
+#clear
 echo "keep your license present. You need in this step. A username and password for the wowza backend needs to be set"
 echo "You have to press ENTER several times to get through the License agreement"
 echo "You also have to set a uername and password"
@@ -99,26 +102,26 @@ sleep 5
 # Do you want to continue? [Y/n]: 						| y
 
 # after wowza install set correct java version
-clear
+#clear
 echo "wowza is installed. Set the java version to the 8u202"
 sleep 2
 rm -rf /usr/local/WowzaStreamingEngine/java
 ln -sf /usr/lib/jvm/java-8-oracle/ /usr/local/WowzaStreamingEngine/java
 
 #and restart everything
-clear
+#clear
 echo "restart wowza services"
 sleep 1
 service WowzaStreamingEngine restart
 service WowzaStreamingEngineManager restart
 
 #install csf firewall
-clear
+#clear
 echo "CSF firewall be installed and configured"
 sleep 2
-ufw disable
+systemctl stop firewalld
+systemctl disable firewalld
 
-apt-get -y install libwww-perl
 cd /tmp
 wget https://download.configserver.com/csf.tgz
 tar -xzf csf.tgz
@@ -140,7 +143,7 @@ sed -i 's/UDP_IN.*/UDP_IN = "53,6790:9999"/g' /etc/csf/csf.conf
 sed -i 's/UDP_OUT.*/UDP_OUT = "53"/g' /etc/csf/csf.conf
 
 #restart firewall
-clear
+#clear
 echo "CSF firewall installed. Restart firewall services to save changes"
 sleep 2
 csf -x
@@ -150,7 +153,7 @@ service WowzaStreamingEngine restart
 service WowzaStreamingEngineManager restart
 
 CURRENT_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
-clear
+#clear
 echo "see below for the url to login to wowza"
 sleep 2
 

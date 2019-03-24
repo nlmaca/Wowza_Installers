@@ -46,7 +46,11 @@ Port 6790-9999  : UDP incoming streams
 ```
 
 # Ubuntu Server (18.04) / CentOS server (7.6)
-The installer scripts have both been tested on fresh installations
+The installer scripts have been tested on fresh installations. Run them with sudo.
+
+There are 2 type of installers. 
+* Specific installers (see Wowza_4.7.7 folder)
+* Generic installers. You have to set the latest download url yourself (input parameter)
 
 # Java 8u202
 I have added the java file on my own domain. You can't download it straight from oracle anymore. You can download the file yourself and change the location if needed in the script.
