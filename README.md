@@ -93,4 +93,4 @@ Do you want to continue? [Y/n]: y
 ```
 
 
-# Enjoy your fresh installed wowza server
+# Enjoy!
