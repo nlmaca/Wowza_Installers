@@ -18,6 +18,8 @@ echo "example url: https://www.wowza.com/downloads/WowzaStreamingEngine-4-7-7/Wo
 read -p 'Wowza downloadlink (Linux): ' DownloadUrl
 FileName="${DownloadUrl##*/}"
 
+JavaUrl="https://vanmarion.nl/software/java/jdk-8u202-linux-x64.tar.gz"
+
 #update 
 clear
 echo "update your system"
@@ -30,7 +32,7 @@ clear
 echo "install java 8u202"
 sleep 2
 cd /tmp
-wget https://vanmarion.nl/software/java/jdk-8u202-linux-x64.tar.gz
+wget $JavaUrl
 
 tar -xzvf jdk-8u202-linux-x64.tar.gz
 rm -R /usr/lib/jvm/java-8-oracle 
