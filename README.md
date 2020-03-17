@@ -1,23 +1,25 @@
-# Wowza_Installer 4.8.0
+# Wowza Installers
 I got tired to run the same commands over and over again when i was testing with wowza. So i made some installers for it.
 I mainly focus on Ubuntu setups, although i have made an 4.7.7 installer for CentOS 7.6
 
 # Update march 17 2020
-Wowza 4.8.0 requires a minimum java version of 9.4.0 and a maximum of 12. 
-In this new installer i use OpenJDK 12. 
-CSF firewall including the necessary ports, It will also add the java version to Wowza.
-In this repository i might other scripts i use within wowza
+- New ubuntu 18.04.x + Wowza StreamingEngine 4.8.0 incl java OpenJDK 12
+- Wowza 4.8.0 requires a minimum of Java version 9.4.0
+- CSF firewall including the necessary ports, It will also add the java version to Wowza.
 
+# Upgrade scripts?
 I am also working on upgrade scripts from wowza 4.7.7 to 4.8.0 including the java update. I base this upgrades on my previous installers. 
 
+# Wowza developer license limitations
+- This will have limitations on 1 input stream and max 10 output streams
+
 # Prerequisites
-You need at least a developer license for this installer. The developer license is valid for 180 days and can be extended. 
-This will have limitations on 1 input stream and max 10 output streams
-If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
+- A fresh installed ubuntu 18.04.x server with ssh support
+- Get a developer license : https://www.wowza.com/media-server/developers/license
+- If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
 
-
-* Request Wowza trial: https://www.wowza.com/media-server/developers/license
-* Java resources: https://jdk.java.net/archive/
+# Java resources
+- OpenJDK archive: https://jdk.java.net/archive/
 
 # Fresh Installers so far.
 1. Ubuntu 18.04.x Installer - 4..8.0         / OpenJDK Java 12
@@ -62,13 +64,7 @@ UDP IN
 Port 6790-9999  : UDP incoming streams
 ```
 
-
-# Prerequisites
-* Install a basic Ubuntu 18.04 or CentOS 7.6 server with OpenSSH support installed.
-* Make sure you have your network set and run ssh on the port you want.
-
 # Installation
-* Get a developer license : https://www.wowza.com/media-server/developers/license
 * Login via ssh to your server.
 * Download the (raw) installer script of your choice to your server: wget 
 * make the file executable: chmod +x installer_script
