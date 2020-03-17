@@ -1,25 +1,42 @@
-# Wowza_Installers
-I got tired to run the same commands over and over again when i was testing with wowza. So i made an installer for it. 
-The installer will install Java 8u202, CSF firewall including the necessary ports, It will also add the java version to Wowza.
+# Wowza_Installer 4.8.0
+I got tired to run the same commands over and over again when i was testing with wowza. So i made some installers for it.
+I mainly focus on Ubuntu setups, although i have made an 4.7.7 installer for CentOS 7.6
+
+# Update march 17 2020
+Wowza 4.8.0 requires a minimum java version of 9.4.0 and a maximum of 12. 
+In this new installer i use OpenJDK 12. 
+CSF firewall including the necessary ports, It will also add the java version to Wowza.
 In this repository i might other scripts i use within wowza
 
-# references
-* Reference: https://www.wowza.com/docs/how-to-troubleshoot-wowza-streaming-engine-installation#network
-* Reference: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-config-server-firewall-csf-on-ubuntu
-* Request Wowza trial: https://www.wowza.com/media-server/developers/license
-* Java: https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+I am also working on upgrade scripts from wowza 4.7.7 to 4.8.0 including the java update. I base this upgrades on my previous installers. 
 
-1. Ubuntu 18.04 Installer
-2. CentOS 7.6 installer
+# Prerequisites
+You need at least a developer license for this installer. The developer license is valid for 180 days and can be extended. 
+This will have limitations on 1 input stream and max 10 output streams
+If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
+
+
+* Request Wowza trial: https://www.wowza.com/media-server/developers/license
+* Java resources: https://jdk.java.net/archive/
+
+# Fresh Installers so far.
+1. Ubuntu 18.04.x Installer - 4..8.0         / OpenJDK Java 12
+2. Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
+3. CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
+
+# Todo: upgrade installer from 4.7.7 > 4.8.0
+# Todo: restore installer update to previous version (in case of update failure)
 
 # What will be installed
 * system will be updated & upgraded
-* Java 8u202 will be installed and connected to Wowza
+* Java will be installed and connected to Wowza
 * Basic Wowza Streaming Engine will be installed
 * CSF (Firewall) be installed & automatic configured with the ports needed including your ssh port
 
 # Demo installation
 in progress
+
+# The CSF (Firewall) part below will be the same in all installers.
 
 # Firewall ports that will be set
 ```
@@ -45,32 +62,17 @@ UDP IN
 Port 6790-9999  : UDP incoming streams
 ```
 
-# Ubuntu Server (18.04) / CentOS server (7.6)
-The installer scripts have been tested on fresh installations. Run them with sudo.
-
-There are 2 type of installers. 
-* Specific installers (see Wowza_4.7.7 folder)
-* Generic installers. You have to set the latest download url yourself (input parameter)
-
-# Java 8u202
-I have added the java file on my own domain. You can't download it straight from oracle anymore. You can download the file yourself and change the location if needed in the script.
-search for JavaUrl on line 21
 
 # Prerequisites
-* Install a basic Ubuntu 18.04 or CentOS 7.6 server
+* Install a basic Ubuntu 18.04 or CentOS 7.6 server with OpenSSH support installed.
 * Make sure you have your network set and run ssh on the port you want.
 
-
-# Wowza installer
-The script will ask for the latest download url. You can copy the Linux url (right click on download button) from here:
-https://www.wowza.com/pricing/installer
-
 # Installation
-* 1. Get a developer license : https://www.wowza.com/media-server/developers/license
-* 2. In the installation proces you have to hit Enter around 60 times for the license agreement (just hold it will also work)
-* 3. Login via ssh to your server.
-* 4. Dowwnload the installer of your choice (get the raw content)
-* 5. run the script with sudo ./installer_script
+* Get a developer license : https://www.wowza.com/media-server/developers/license
+* Login via ssh to your server.
+* Download the (raw) installer script of your choice to your server: wget 
+* make the file executable: chmod +x installer_script
+* run the script with sudo ./installer_script
 
 Several questions will be asked
 - Set a username and paswword for your wowza backend (weblogin)
@@ -95,6 +97,6 @@ Setup is now ready to begin installing Wowza Streaming Engine on your computer.
 
 Do you want to continue? [Y/n]: y
 ```
-
+You will be notified with the login url after the installation has completed
 
 # Enjoy!

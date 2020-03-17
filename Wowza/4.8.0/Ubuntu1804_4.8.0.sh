@@ -1,92 +1,91 @@
 #!/bin/bash
 
-# Date: 2019-03-24
+# Date: 2020-03-17
 # Author: J. van Marion / jeroen@vanmarion.nl
-# Version: 1.0
+# Version: 2.0
 
-# Generic Wowza installer for CentOS 7.6
-# Including: Java 8 Installation, Firewall CSF installation/configuration
+# Wowza installer 4.8.0 for Ubuntu 18.04.4
+# Including: 
+#   Java OpenJDK 12 Installation
+#   Wowza 4.8.0 Installation
+#   Firewall CSF installation/configuration
 
-# filename: CentOS76_wowza_installer.sh
-# run as: root user
+# run with sudo
 
+# update march 13 2020. This wowza version runs on Java 9+
+# release notes: https://www.wowza.com/resources/README.html
+
+
+## Wowza Streaming Engine 4.7.8 and later is built on Java 9 (OpenJDK Java SE JRE 9.0.4) and supports Java versions 9 - 12. 
+## Earlier versions of Java aren't supported. 
+# ubuntu 18.04 official repository only supports Openjdk 11. You can get the Openjdk version 12 here: https://jdk.java.net/archive/
+
+# used in the installer 12 GA (build 12+33): https://download.java.net/java/GA/jdk12/33/GPL/openjdk-12_linux-x64_bin.tar.gz
+# note: newer versions are not supported
 # ##############
-# Input data
-echo "get the latest (Linux) download version: https://www.wowza.com/pricing/installer"
-echo "example url: https://www.wowza.com/downloads/WowzaStreamingEngine-4-7-7/WowzaStreamingEngine-4.7.7-linux-x64-installer.run "
 
-read -p 'Wowza downloadlink (Linux): ' DownloadUrl
-FileName="${DownloadUrl##*/}"
-
-JavaUrl="https://vanmarion.nl/software/java/jdk-8u202-linux-x64.tar.gz"
-
-# install necessary packages (wget, vim, perl, perl-Time-HiRes)
-yum install wget vim perl-libwww-perl.noarch perl-Time-HiRes  -y
+echo "Intall Wowza Streaming Engine 4.8.0"
+JavaUrl="https://download.java.net/java/GA/jdk12/33/GPL/openjdk-12_linux-x64_bin.tar.gz"
 
 #update 
-#clear
+clear
 echo "update your system"
 sleep 2
 
-yum update -y
+apt-get -y update && apt-get -y upgrade
 
 #install java
-#clear
-echo "install java 8u202"
+clear
+echo "install java OpenJDK 12"
 sleep 2
 cd /tmp
 wget $JavaUrl
 
-tar -xzvf jdk-8u202-linux-x64.tar.gz
-rm -Rf /usr/lib/jvm/java-8-oracle -y
-mkdir -p /usr/lib/jvm/java-8-oracle
-mv jdk1.8.0_202/* /usr/lib/jvm/java-8-oracle
-chown -R root:root /usr/lib/jvm/java-8-oracle
+tar -xzvf openjdk-12_linux-x64_bin.tar.gz
+#rm -R /usr/lib/jvm/java-8-oracle 
+mkdir -p /usr/lib/jvm/openjdk-12
+mv jdk-12/* /usr/lib/jvm/openjdk-12
+chown -R root:root /usr/lib/jvm/openjdk-12
 
-#set java as default
-#clear
-echo "set java as default"
-sleep 2
-sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-oracle/jre/bin/java 1091
-sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-8-oracle/bin/javac 1091
+# configure to use the new openjdk as default
+#sleep 2
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/openjdk-12/bin/java 1
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/openjdk-12/bin/javac 1
 
-# create file for java and add content
-#clear
+# create file for java default path and add content
+clear
 echo "create file for java and add content and run the file"
 sleep 2
 echo "# add these lines to it, and save the file
-export J2SDKDIR=/usr/lib/jvm/java-8-oracle
-export J2REDIR=/usr/lib/jvm/java-8-oracle/jre
-export PATH=$PATH:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export DERBY_HOME=/usr/lib/jvm/java-8-oracle/db" >> /etc/profile.d/jdk.sh
+export JAVA_HOME=/usr/lib/jvm/openjdk-12
+export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile.d/jdk12.sh
 
 #run the file
-source /etc/profile.d/jdk.sh
+source /etc/profile.d/jdk12.sh
 
 #check java version
-#clear
+clear
 echo "the installed java version"
 java -version
 sleep 2
 
 #install Wowza
 #keep your license key ready. its needed in this installer
-#clear
+clear
 echo "time to download wowza"
 sleep 2
 cd /tmp
-wget $DownloadUrl
-chmod +x $FileName
+wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-8-0/WowzaStreamingEngine-4.8.0-linux-x64-installer.run
+chmod +x WowzaStreamingEngine-4.8.0-linux-x64-installer.run
 
 #run installer
-#clear
+clear
 echo "keep your license present. You need in this step. A username and password for the wowza backend needs to be set"
 echo "You have to press ENTER several times to get through the License agreement"
 echo "You also have to set a uername and password"
 echo "The installation starts in 5 seconds"
 sleep 5
-./$FileName
+./WowzaStreamingEngine-4.8.0-linux-x64-installer.run
 
 #agree to agreement by pressing enter multiple times 	| Press [Enter] to continue:
 # accept agreement										| Do you accept this agreement? [y/n]:
@@ -102,26 +101,26 @@ sleep 5
 # Do you want to continue? [Y/n]: 						| y
 
 # after wowza install set correct java version
-#clear
-echo "wowza is installed. Set the java version to the 8u202"
+clear
+echo "wowza is installed. Set the java version to OpenJDK 12"
 sleep 2
 rm -rf /usr/local/WowzaStreamingEngine/java
-ln -sf /usr/lib/jvm/java-8-oracle/ /usr/local/WowzaStreamingEngine/java
+ln -sf /usr/lib/jvm/openjdk-12/ /usr/local/WowzaStreamingEngine/java
 
 #and restart everything
-#clear
+clear
 echo "restart wowza services"
 sleep 1
 service WowzaStreamingEngine restart
 service WowzaStreamingEngineManager restart
 
 #install csf firewall
-#clear
+clear
 echo "CSF firewall be installed and configured"
 sleep 2
-systemctl stop firewalld
-systemctl disable firewalld
+ufw disable
 
+apt-get -y install libwww-perl
 cd /tmp
 wget https://download.configserver.com/csf.tgz
 tar -xzf csf.tgz
@@ -143,7 +142,7 @@ sed -i 's/UDP_IN.*/UDP_IN = "53,6790:9999"/g' /etc/csf/csf.conf
 sed -i 's/UDP_OUT.*/UDP_OUT = "53"/g' /etc/csf/csf.conf
 
 #restart firewall
-#clear
+clear
 echo "CSF firewall installed. Restart firewall services to save changes"
 sleep 2
 csf -x
@@ -153,7 +152,7 @@ service WowzaStreamingEngine restart
 service WowzaStreamingEngineManager restart
 
 CURRENT_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
-#clear
+clear
 echo "see below for the url to login to wowza"
 sleep 2
 
@@ -161,3 +160,4 @@ echo "Make sure to reboot your server to check if everything is working"
 echo "Your wowza instance can be reached at: http://$CURRENT_IP:8088/enginemanager"
 
 echo "## installation is done"
+echo "In wowza EngineManager check Server > Performance Tuning and check if the Java version is version 12."
