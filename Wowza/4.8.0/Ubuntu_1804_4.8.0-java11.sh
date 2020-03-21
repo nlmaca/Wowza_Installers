@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# Date: 2020-03-17
+# Date: 2020-03-21
 # Author: J. van Marion / jeroen@vanmarion.nl
-# Version: 2.0
+# Version: 2.1
 
 # Wowza installer 4.8.0 for Ubuntu 18.04.4
 # Including: 
-#   Java OpenJDK 12 Installation
 #   Wowza 4.8.0 Installation
 #   Firewall CSF installation/configuration
 
-# run with sudo
+# run as root or with sudo
 
 # update march 13 2020. This wowza version runs on Java 9+
 # release notes: https://www.wowza.com/resources/README.html
 
 
-## Wowza Streaming Engine 4.7.8 and later is built on Java 9 (OpenJDK Java SE JRE 9.0.4) and supports Java versions 9 - 12. 
-## Earlier versions of Java aren't supported. 
-# ubuntu 18.04 official repository only supports Openjdk 11. You can get the Openjdk version 12 here: https://jdk.java.net/archive/
-
-# used in the installer 12 GA (build 12+33): https://download.java.net/java/GA/jdk12/33/GPL/openjdk-12_linux-x64_bin.tar.gz
-# note: newer versions are not supported
+## Wowza Streaming Engine 4.7.8 and later is built on Java 9
+# Ubuntu 18.04 default supports 11
+# note: newer versions are not supported (yet)
 # ##############
+# https://linuxize.com/post/install-java-on-ubuntu-18-04/
 
-echo "Intall Wowza Streaming Engine 4.8.0"
-JavaUrl="https://download.java.net/java/GA/jdk12/33/GPL/openjdk-12_linux-x64_bin.tar.gz"
+
+echo "Install Java 11 + Wowza Streaming Engine 4.8.0 + CSF Firewall"
 
 #update 
 clear
@@ -36,32 +33,38 @@ apt-get -y update && apt-get -y upgrade
 
 #install java
 clear
-echo "install java OpenJDK 12"
+echo "install OpenJDK 11"
 sleep 2
-cd /tmp
-wget $JavaUrl
 
-tar -xzvf openjdk-12_linux-x64_bin.tar.gz
-#rm -R /usr/lib/jvm/java-8-oracle 
-mkdir -p /usr/lib/jvm/openjdk-12
-mv jdk-12/* /usr/lib/jvm/openjdk-12
-chown -R root:root /usr/lib/jvm/openjdk-12
+apt install -y default-jdk
+echo "check java version"
+java -version
+sleep 2
+
+# get java path
+update-alternatives --list java
 
 # configure to use the new openjdk as default
-#sleep 2
-sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/openjdk-12/bin/java 1
-sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/openjdk-12/bin/javac 1
+# default dir: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+sleep 2
 
-# create file for java default path and add content
+#set java as default
+clear
+echo "set java 11 as default"
+sleep 2
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-11-openjdk-amd64/bin/java 1
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-11-openjdk-amd64/bin/java 1
+
+# create file for java and add content
 clear
 echo "create file for java and add content and run the file"
 sleep 2
 echo "# add these lines to it, and save the file
-export JAVA_HOME=/usr/lib/jvm/openjdk-12
-export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile.d/jdk12.sh
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" >> /etc/profile.d/jdk11.sh
+#run the file
 
 #run the file
-source /etc/profile.d/jdk12.sh
+source /etc/profile.d/jdk11.sh
 
 #check java version
 clear
@@ -87,25 +90,25 @@ echo "The installation starts in 5 seconds"
 sleep 5
 ./WowzaStreamingEngine-4.8.0-linux-x64-installer.run
 
-#agree to agreement by pressing enter multiple times 	| Press [Enter] to continue:
-# accept agreement										| Do you accept this agreement? [y/n]:
-#set license key										| Please enter your Wowza Streaming Engine License Key.
+#agree to agreement by pressing enter multiple times | Press [Enter] to continue:
+# accept agreement	| Do you accept this agreement? [y/n]:
+#set license key	| Please enter your Wowza Streaming Engine License Key.
 # Create Administrator Account
 # Enter a user name and password that will be used to manage Wowza StreamingEngine.
-# User Name: []: 										| name_me
-# Password: :											| xxxx
-# Confirm Password: :									| xxxx
-# Start Wowza Streaming Engine automatically [Y/n]: 	| y
+# User Name: []: 	| name_me
+# Password: :		| xxxx
+# Confirm Password: | xxxx
+# Start Wowza Streaming Engine automatically [Y/n]: y
 
 # Setup is now ready to begin installing Wowza Streaming Engine on your computer.
-# Do you want to continue? [Y/n]: 						| y
+# Do you want to continue? [Y/n]: y
 
 # after wowza install set correct java version
 clear
 echo "wowza is installed. Set the java version to OpenJDK 12"
 sleep 2
 rm -rf /usr/local/WowzaStreamingEngine/java
-ln -sf /usr/lib/jvm/openjdk-12/ /usr/local/WowzaStreamingEngine/java
+ln -sf /usr/lib/jvm/java-11-openjdk-amd64/ /usr/local/WowzaStreamingEngine/java
 
 #and restart everything
 clear
@@ -160,4 +163,4 @@ echo "Make sure to reboot your server to check if everything is working"
 echo "Your wowza instance can be reached at: http://$CURRENT_IP:8088/enginemanager"
 
 echo "## installation is done"
-echo "In wowza EngineManager check Server > Performance Tuning and check if the Java version is version 12."
+echo "In wowza EngineManager check Server > Performance Tuning and check if the Java version is version 11."

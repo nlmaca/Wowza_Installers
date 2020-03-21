@@ -19,7 +19,7 @@ I mainly focus on Ubuntu setups, although i have made an 4.7.7 installer for Cen
 - OpenJDK archive: https://jdk.java.net/archive/
 
 ## Fresh Installers so far.
-1. Ubuntu 18.04.x Installer - 4..8.0         / OpenJDK Java 12
+1. Ubuntu 18.04.x Installer - 4.8.0          / OpenJDK Java 11
 2. Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
 3. CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
 
