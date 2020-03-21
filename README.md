@@ -2,9 +2,9 @@
 I got tired to run the same commands over and over again when i was testing with wowza. So i made some installers for it.
 I mainly focus on Ubuntu setups, although i have made a 4.7.7 installer for CentOS 7.6
 
-## Update march 17 2020
-- New ubuntu 18.04.x + Wowza StreamingEngine 4.8.0 incl java OpenJDK 12
-- Wowza 4.8.0 requires a minimum of Java version 9.4.0
+## Update march 21 2020
+- New ubuntu 18.04.x + Wowza StreamingEngine 4.8.0 incl java 11
+- Wowza 4.8.0 requires a minimum of Java version 9.0.4
 - CSF firewall including the necessary ports, It will also add the java version to Wowza.
 
 ## Wowza developer license limitations
