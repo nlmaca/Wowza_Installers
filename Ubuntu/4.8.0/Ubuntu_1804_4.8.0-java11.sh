@@ -21,7 +21,6 @@
 # ##############
 # https://linuxize.com/post/install-java-on-ubuntu-18-04/
 
-
 echo "Install Java 11 + Wowza Streaming Engine 4.8.0 + CSF Firewall"
 
 #update 
@@ -33,10 +32,11 @@ apt-get -y update && apt-get -y upgrade
 
 #install java
 clear
-echo "install OpenJDK 11"
+echo "install Java 11"
 sleep 2
 
 apt install -y default-jdk
+
 echo "check java version"
 java -version
 sleep 2
@@ -48,13 +48,6 @@ update-alternatives --list java
 # default dir: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 sleep 2
 
-#set java as default
-clear
-echo "set java 11 as default"
-sleep 2
-sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-11-openjdk-amd64/bin/java 1
-sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-11-openjdk-amd64/bin/java 1
-
 # create file for java and add content
 clear
 echo "create file for java and add content and run the file"
@@ -65,12 +58,6 @@ export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" >> /etc/prof
 
 #run the file
 source /etc/profile.d/jdk11.sh
-
-#check java version
-clear
-echo "the installed java version"
-java -version
-sleep 2
 
 #install Wowza
 #keep your license key ready. its needed in this installer
@@ -105,7 +92,7 @@ sleep 5
 
 # after wowza install set correct java version
 clear
-echo "wowza is installed. Set the java version to OpenJDK 12"
+echo "wowza is installed. Update the Java version for Wowza to use"
 sleep 2
 rm -rf /usr/local/WowzaStreamingEngine/java
 ln -sf /usr/lib/jvm/java-11-openjdk-amd64/ /usr/local/WowzaStreamingEngine/java
@@ -154,7 +141,12 @@ csf -e
 service WowzaStreamingEngine restart
 service WowzaStreamingEngineManager restart
 
-CURRENT_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
+# single network adapter
+#CURRENT_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
+
+# if more then 1 adapter
+CURRENT_IP="#(ip -4 addr show ens160 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')"
+
 clear
 echo "see below for the url to login to wowza"
 sleep 2
