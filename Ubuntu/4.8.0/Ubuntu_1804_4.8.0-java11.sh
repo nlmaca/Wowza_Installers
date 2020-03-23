@@ -9,9 +9,9 @@
 #   Wowza 4.8.0 Installation
 #   Firewall CSF installation/configuration
 
-# run as root or with sudo
+# run as root
 
-# update march 13 2020. This wowza version runs on Java 9+
+# update march 23 2020. This wowza version runs on Java 9+
 # release notes: https://www.wowza.com/resources/README.html
 
 
@@ -124,10 +124,9 @@ perl /usr/local/csf/bin/csftest.pl
 SSH_PORT="$(grep Port /etc/ssh/sshd_config | awk 'NR==1{print $2}')"
 echo "your current ssh port wil be set in the firewall rules:" $SSH_PORT
 
-
 sed -i 's/TESTING = "1"/TESTING = "0"/g' /etc/csf/csf.conf
-sed -i 's/TCP_IN.*/TCP_IN = "'$SSH_PORT',53,80,443,554,1935,8084:8088"/' /etc/csf/csf.conf
-sed -i 's/TCP_OUT.*/TCP_OUT = "53,80,113,443,554,1935,554"/g' /etc/csf/csf.conf
+sed -i 's/TCP_IN.*/TCP_IN = "'$SSH_PORT',53,80,443,554,1935,8084:8089"/' /etc/csf/csf.conf
+sed -i 's/TCP_OUT.*/TCP_OUT = "53,80,113,443,554,1935"/g' /etc/csf/csf.conf
 sed -i 's/UDP_IN.*/UDP_IN = "53,6790:9999"/g' /etc/csf/csf.conf
 sed -i 's/UDP_OUT.*/UDP_OUT = "53"/g' /etc/csf/csf.conf
 
