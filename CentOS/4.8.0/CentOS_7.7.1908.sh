@@ -128,7 +128,7 @@ echo "your current ssh port wil be set in the firewall rules:" $SSH_PORT
 
 sudo sed -i 's/TESTING = "1"/TESTING = "0"/g' /etc/csf/csf.conf
 sudo sed -i 's/TCP_IN.*/TCP_IN = "'$SSH_PORT',53,80,443,554,1935,8084:8088"/' /etc/csf/csf.conf
-sudo sed -i 's/TCP_OUT.*/TCP_OUT = "53,80,113,443,554,1935,554"/g' /etc/csf/csf.conf
+sudo sed -i 's/TCP_OUT.*/TCP_OUT = "53,80,113,443,554,1935"/g' /etc/csf/csf.conf
 sudo sed -i 's/UDP_IN.*/UDP_IN = "53,6790:9999"/g' /etc/csf/csf.conf
 sudo sed -i 's/UDP_OUT.*/UDP_OUT = "53"/g' /etc/csf/csf.conf
 
