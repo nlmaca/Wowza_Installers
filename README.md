@@ -1,6 +1,16 @@
 # Wowza Installers
 I got tired to run the same commands over and over again when i was testing with wowza. So i made some installers for it.
-I mainly focus on Ubuntu setups, although i have made a 4.7.7 installer for CentOS 7.6
+I mainly focus on Ubuntu setups, although i have make new CentOS installers too when i feel like it.
+
+## Prerequisites - (free) wowza account
+* Create a free account at wowza. After that login and then open this url: https://www.wowza.com/media-server/developers/license
+* you will get straight to the trial form. All you have to do is check some boxes and start the request for the developer license
+- If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
+* you have a default installed CentOS 7.x server or Ubuntu 18.04.x server installed
+
+## update april 29 2020
+- New installer for CentOS 7.7.1908 including Java OpenJDK 11 (run as user with administrator privileges)
+
 
 ## Update march 21 2020
 - New ubuntu 18.04.x + Wowza StreamingEngine 4.8.0 incl java 11
@@ -10,18 +20,18 @@ I mainly focus on Ubuntu setups, although i have made a 4.7.7 installer for Cent
 ## Wowza developer license limitations
 - This will have limitations on 3 input stream and max 10 output streams
 
-## Prerequisites
-- A fresh installed ubuntu 18.04.x server with ssh support
-- Get a developer license : https://www.wowza.com/media-server/developers/license
-- If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
 
 ## Fresh Installers so far.
-1. Ubuntu 18.04.x Installer - 4.8.0          / Java 11 (comes default with Ubuntu 18.04)
-2. Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
-3. CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
+* Ubuntu 18.04.x Installer - 4.8.0          / Java 11 (comes default with Ubuntu 18.04)
+* Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
+
+* CentOS 7.7.1908 Installer - Wowza 4.8.0   / Oracle Java JDK java-11-openjdk-11.0.7.10-4.el7_8.x86_64
+* CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
+
 
 ## Todo: 
 - upgrade installer from 4.7.7 > 4.8.0
+- upgrade java only on existing system
 - restore installer update to previous version (in case of update failure)
 
 ## What will be installed
