@@ -144,7 +144,7 @@ service WowzaStreamingEngineManager restart
 #CURRENT_IP="$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')"
 
 # if more then 1 adapter
-CURRENT_IP="#(ip -4 addr show ens160 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')"
+CURRENT_IP="$(ip -4 addr show ens160 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')"
 
 clear
 echo "see below for the url to login to wowza"
