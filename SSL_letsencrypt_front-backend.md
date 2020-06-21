@@ -1,9 +1,8 @@
-# SSL enable letsencrypt on CentOS 7 and Ubuntu 18.04/20.04 LTS servers 
-
-# Wowza version: 4.7.3+
+# Letsencrypt Wowza (CentOS 7 / Ubuntu 18.04/20.04) 
 
 # Requirements
 - You should have setup a basic server with an ipaddress and a valid domainname forwarded to the server. 
+- Wowza version: 4.7.3+ present on your system
 - In this example i use: SUB.DOMAIN.EXT which is forwarded to my wowza server. So change this in the tutorial with your own domain!
 
 # Questions / Errors?
@@ -13,20 +12,24 @@
 # Intro
 - If you need to setup a complete server, please check out the installer files for your setup
 - If you have your own firewall setup please be aware to open Inbound ports: 80, 443, 8090
-   - 80 and 443 are needed to validate the Letsencrypt certificate
-   - 8090 is the port we will use for our backend connection
+```
+80 and 443 are needed to validate the Letsencrypt certificate
+8090 is the port we will use for our backend connection
+```
 
 # Setup and configuration
 Go to your wowza engineManager (browser)
 In streamingengineManager open port 443 (Server > Virtual Host Setup
-   - Edit Virtual Host Setup > Add Host port
-   Name: SSL streaming
-   Type: Streaming
-   Ip Address: *
-   Ports: 443
-   Do NOT enable streamlock SSL (streamlock setup will be explained in a different tutorial)
-   / Save and restart Vhost
------------------------------------------------------------------------------------------------   
+Edit Virtual Host Setup > Add Host port
+```
+Name: SSL streaming
+Type: Streaming
+Ip Address: *
+Ports: 443
+```
+Do NOT enable streamlock SSL (streamlock setup will be explained in a different tutorial)
+Save and restart Vhost
+  
 
 # Setup SSL certbot
 ```
@@ -48,20 +51,22 @@ agree TOS(Terms of Service): A
 Share your email: (up to you): N
 ```
 
-# Add cronjobs for autorenewal
+* *Add cronjobs for autorenewal
+```
 @weekly root cd /opt/letsencrypt && git pull >> /var/log/letsencrypt/letsencrypt-auto-update.log
 @monthly root /opt/letsencrypt/letsencrypt-auto certonly --quiet --standalone --renew-by-default -d SUB.DOMAIN.EXT >> /var/log/letsencrypt/letsencrypt-auto-update.log
+```
 
------------------------------------------------------------------------------------------------
 # Letsencrypt converter SSL to JKS file. (so it can be used in wowza)
-# Credits to Robymus
+* Credits to Robymus
+```
 cd /usr/local/WowzaStreamingEngine/lib 
 wget https://github.com/robymus/wowza-letsencrypt-converter/releases/download/v0.2/wowza-letsencrypt-converter-0.2.jar
 
 java -jar wowza-letsencrypt-converter-0.2.jar -v /usr/local/WowzaStreamingEngine/conf/ /etc/letsencrypt/live/
+```
 
-# 2 files should have been created. a .jks and a .txt file
-# Read the txt file and copy the contents in a temporary notepad
+2 files should have been created. a .jks and a .txt file. Read the txt file and copy the contents in a temporary notepad
 ```
 cat /usr/local/WowzaStreamingEngine/conf/jksmap.txt
 ```
