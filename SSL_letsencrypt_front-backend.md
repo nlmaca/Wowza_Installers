@@ -29,19 +29,24 @@ In streamingengineManager open port 443 (Server > Virtual Host Setup
 -----------------------------------------------------------------------------------------------   
 
 # Setup SSL certbot
+```
 cd /tmp
 Ubuntu: apt-get update && apt-get upgrade
 CentOS: yum update
+```
 
 # install git
+```
 git clone https://github.com/certbot/certbot /opt/letsencrypt
 cd /opt/letsencrypt
-
 sudo -H ./letsencrypt-auto certonly --standalone -d SUB.DOMAIN.EXT
-
-# enter email
-# agree TOS(Terms of Service): A
-# Share your email: (up to you): N
+```
+Answer some of the questions:
+```
+enter email: set-your-email
+agree TOS(Terms of Service): A
+Share your email: (up to you): N
+```
 
 # Add cronjobs for autorenewal
 @weekly root cd /opt/letsencrypt && git pull >> /var/log/letsencrypt/letsencrypt-auto-update.log
