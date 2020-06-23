@@ -1,3 +1,4 @@
+# DRAFT: testing needed!
 # Letsencrypt Wowza (Ubuntu 18.04 or 20.04) 
 * Version: 1.0 / June 23 2020
 Why Letsencrypt?. Wowza can also be used with Streamlock, which is currently free, but at the time i wanted to use SSL, it was a pai subscription. So i starte experimenting with Letsencrypt. 
