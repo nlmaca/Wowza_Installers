@@ -26,6 +26,7 @@ First only the frontend (wowza playback) worked, but now also the backend (engin
 ```
 yum update
 yum install git
+yum install wget
 
 git clone https://github.com/certbot/certbot /opt/letsencrypt
 cd /opt/letsencrypt
@@ -101,6 +102,7 @@ Change only the keyStorePath and keyStorePassword to the ones from the jks file 
     <Algorithm>SunX509</Algorithm>
     <CipherSuites></CipherSuites>
     <Protocols></Protocols>
+    <AllowHttp2>false</AllowHttp2>
 </SSLConfig>
 ```
 Save the File
