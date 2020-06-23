@@ -25,6 +25,7 @@ First only the frontend (wowza playback) worked, but now also the backend (engin
 # install git and setup Certbot (standalone)
 ```
 yum update
+yum install git
 
 git clone https://github.com/certbot/certbot /opt/letsencrypt
 cd /opt/letsencrypt
