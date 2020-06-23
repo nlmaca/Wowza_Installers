@@ -8,6 +8,9 @@ I mainly focus on Ubuntu setups, although i have make new CentOS installers too 
 - If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
 * you have a default installed CentOS 7.x server or Ubuntu 18.04.x server installed
 
+## update june 23 2020
+- updated configuration setup for CentOS 7 and Ubuntu 20.04 for enabling SSL Letsencrypt.
+
 ## update april 29 2020
 - New installer for CentOS 7.7.1908 including Java OpenJDK 11 (run as user with administrator privileges)
 
