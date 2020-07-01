@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Date: 2020-03-21
+# Date: 2020-07-01
 # Author: J. van Marion / jeroen@vanmarion.nl
 # Version: 2.1
 
-# Wowza installer 4.8.0 for Ubuntu 18.04.4
+# Wowza installer 4.8.5 for Ubuntu 18.04.4
 # Including: 
-#   Wowza 4.8.0 Installation
+#   Wowza 4.8.5 Installation
 #   Firewall CSF installation/configuration
 
 # run as root
@@ -21,8 +21,7 @@
 # ##############
 # https://linuxize.com/post/install-java-on-ubuntu-18-04/
 
-echo "Install Java 11 + Wowza Streaming Engine 4.8.0 + CSF Firewall"
-
+echo "Install Java 11 + Wowza Streaming Engine 4.8.5 + CSF Firewall"
 #update 
 clear
 echo "update your system"
