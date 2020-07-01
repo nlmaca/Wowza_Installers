@@ -65,7 +65,7 @@ clear
 echo "time to download wowza"
 sleep 2
 cd /tmp
-wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-8-0/WowzaStreamingEngine-4.8.5-linux-x64-installer.run
+wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-8-5/WowzaStreamingEngine-4.8.5-linux-x64-installer.run
 chmod +x WowzaStreamingEngine-4.8.5-linux-x64-installer.run
 
 #run installer
