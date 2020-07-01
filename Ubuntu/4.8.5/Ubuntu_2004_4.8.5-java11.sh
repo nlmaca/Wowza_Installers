@@ -15,6 +15,9 @@
 # release notes: https://www.wowza.com/resources/README.html
 
 
+# NOTE: 
+# when adding a domainname to your server, make sure to add the domainname to your /etc/hosts file otherwise the wowza enginemanager won't let you login
+
 ## Wowza Streaming Engine 4.7.8 and later is built on Java 9. Java 11 is supported
 
 echo "Install Java 11 + Wowza Streaming Engine 4.8.5 + CSF Firewall"
