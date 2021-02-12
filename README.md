@@ -1,47 +1,38 @@
-# Wowza Installers
-I got tired to run the same commands over and over again when i was testing with wowza. So i made some installers for it.
-I mainly focus on Ubuntu setups, although i have make new CentOS installers too when i feel like it.
+# Intro
+I got tired of running the same commands over and over again when i was testing with wowza. So i made some installers for it. I mainly focus on Ubuntu setups, although i also try to maintain the CentOS distro (or when requested).
+
+* I keep a personal blog which i update once in a while when i feel like it. https://vanmarion.nl/blog. Feel free to leave a comment or contact me if you have questions. 
 
 ## Prerequisites - (free) wowza account
 * Create a free account at wowza. After that login and then open this url: https://www.wowza.com/media-server/developers/license
-* you will get straight to the trial form. All you have to do is check some boxes and start the request for the developer license
+* you will get straight to the trial form. All you have to do is check some boxes and start the request for the developer license. The developer license is free for 180 days. And after that you can get a new free license. The free version has some limitions of input and output limits, but for everything else your server is a like an enterprise license.
+
 - If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
-* you have a default installed CentOS 7.x server or Ubuntu 18.04.x server installed
+* you have a default installed CentOS 7.x server or Ubuntu 20.04.x server installed
 
-## update june 23 2020
-- updated configuration setup for CentOS 7 and Ubuntu 20.04 for enabling SSL Letsencrypt.
+# Server Installers 
+The installers are complete scripts which install all the components needed:
+- Java 11 Installation
+- CSF Firewall Including the correct ports
+- Wowza Server Installation (all you need to fill in is the LicenseKey and your preferred login credentials for the backend of Wowza)
+- Check the installers for the wowza version you would like to install.
 
-## update april 29 2020
-- New installer for CentOS 7.7.1908 including Java OpenJDK 11 (run as user with administrator privileges)
-
-
-## Update march 21 2020
-- New ubuntu 18.04.x + Wowza StreamingEngine 4.8.0 incl java 11
-- Wowza 4.8.0 requires a minimum of Java version 9.0.4
-- CSF firewall including the necessary ports, It will also add the java version to Wowza.
-
-## Wowza developer license limitations
-- This will have limitations on 3 input stream and max 10 output streams
-
-
-## Fresh Installers so far.
-* Ubuntu 18.04.x Installer - 4.8.0          / Java 11 (comes default with Ubuntu 18.04)
-* Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
-
-* CentOS 7.7.1908 Installer - Wowza 4.8.0   / Oracle Java JDK java-11-openjdk-11.0.7.10-4.el7_8.x86_64
-* CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
-
+# SSL Frontend & Backend
+Second part is you can run your wowza server on a letsencrypt SSL. Although StreamLock from Wowza is also possible (and free of charge now). That was paid before, so that's why choose for LetsEncrypt.
+- You can choose to run only the frontend on SSL or the backend, or both.
+- SSL encryption will cause a higher cpu load on your server due to the encryption of the stream. I can't tell you what the load will be, that all depends on your streaming setup and connections.
 
 ## Todo: 
-- upgrade installer from 4.7.7 > 4.8.0
-- upgrade java only on existing system
-- restore installer update to previous version (in case of update failure)
+- upgrade installers and how to restore (in case of update failure)
+- upgrade java 9 to java 11 only on existing system
+
 
 ## What will be installed
 * system will be updated & upgraded
-* Java will be installed and connected to Wowza
+* Java 11 will be installed and connected to Wowza
 * Basic Wowza Streaming Engine will be installed
 * CSF (Firewall) be installed & automatic configured with the ports needed including your ssh port
+
 
 ## The CSF (Firewall) part below will be the same in all installers.
 
