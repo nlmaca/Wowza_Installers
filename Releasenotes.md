@@ -1,3 +1,6 @@
+## Update 2021-02-17
+- Updated Ubuntu 18.04 Upgrade to Wowza 4.8.9 incl installation of Java 11
+
 ## Update 2021-02-12
 - Updated CentOS SSL activation (requested by User). certbot-auto is deprecated.
 - now certbot is installed with snap

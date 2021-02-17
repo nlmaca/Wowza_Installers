@@ -1,14 +1,12 @@
 # Intro
-I got tired of running the same commands over and over again when i was testing with wowza. So i made some installers for it. I mainly focus on Ubuntu setups, although i also try to maintain the CentOS distro (or when requested).
-
-* I keep a personal blog which i update once in a while when i feel like it. https://vanmarion.nl/blog. Feel free to leave a comment or contact me if you have questions. 
+I got tired of running the same commands over and over again when i was testing with wowza. So i made some installers for it. I mainly focus on Ubuntu setups, although i also try to maintain the CentOS distro (when requested).
 
 ## Prerequisites - (free) wowza account
 * Create a free account at wowza. After that login and then open this url: https://www.wowza.com/media-server/developers/license
 * you will get straight to the trial form. All you have to do is check some boxes and start the request for the developer license. The developer license is free for 180 days. And after that you can get a new free license. The free version has some limitions of input and output limits, but for everything else your server is a like an enterprise license.
 
 - If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
-* you have a default installed CentOS 7.x server or Ubuntu 20.04.x server installed
+* you have a default installed CentOS 7.x server or Ubuntu 18.04 or 20.04.x server installed
 
 # Server Installers 
 The installers are complete scripts which install all the components needed:
@@ -17,6 +15,9 @@ The installers are complete scripts which install all the components needed:
 - Wowza Server Installation (all you need to fill in is the LicenseKey and your preferred login credentials for the backend of Wowza)
 - Check the installers for the wowza version you would like to install.
 
+# Upgrade installers
+- Normally you can download the upgrade zip from your wowza account. I added the zip to my personal domain. If you don't trust that, just change the download url in the wget command.
+
 # SSL Frontend & Backend
 Second part is you can run your wowza server on a letsencrypt SSL. Although StreamLock from Wowza is also possible (and free of charge now). That was paid before, so that's why choose for LetsEncrypt.
 - You can choose to run only the frontend on SSL or the backend, or both.
@@ -24,7 +25,7 @@ Second part is you can run your wowza server on a letsencrypt SSL. Although Stre
 
 ## Todo: 
 - upgrade installers and how to restore (in case of update failure)
-- upgrade java 9 to java 11 only on existing system
+- upgrade java 8 to java 11 only on existing system
 
 
 ## What will be installed
@@ -59,36 +60,4 @@ Port 80		    : Licensing server connections /
 UDP IN			
 Port 6790-9999  : UDP incoming streams
 ```
-
-## Installation
-* Login via ssh to your server.
-* Download the (raw) installer script of your choice to your server: wget 
-* make the file executable: chmod +x installer_script
-* run the script with sudo ./installer_script
-
-Several questions will be asked
-- Set a username and paswword for your wowza backend (weblogin)
-- Answer the other questions with: Y
-```
-Enter a user name and password that will be used to manage Wowza Streaming
-Engine.
-User Name: []: wowza
-
-Password: :
-Confirm Password: :
-Note: User Name and Password are case-sensitive.
-----------------------------------------------------------------------------
-Startup Configuration
-
-Start Wowza Streaming Engine automatically [Y/n]: y
-
-Clear the check box to start Wowza Streaming Engine manually.
-
-----------------------------------------------------------------------------
-Setup is now ready to begin installing Wowza Streaming Engine on your computer.
-
-Do you want to continue? [Y/n]: y
-```
-You will be notified with the login url after the installation has completed
-
 ## Enjoy!
