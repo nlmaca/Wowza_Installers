@@ -1,3 +1,9 @@
+## Update 2021-02-19
+- Updated Ubuntu 18.04 + 20.04 LTS Upgrade wowza with or without java upgrade
+- Updated Ubuntu SSL installatation
+- Note: Wowza 4.8.9 can only be updated from earlier versions.
+- updated Ubuntu SSL frontend & backend
+
 ## Update 2021-02-17
 - Updated Ubuntu 18.04 Upgrade to Wowza 4.8.9 incl installation of Java 11
 
@@ -21,11 +27,3 @@
 
 ## Wowza developer license limitations
 - This will have limitations on 3 input stream and max 10 output streams
-
-
-## Fresh Installers so far.
-* Ubuntu 18.04.x Installer - 4.8.0          / Java 11 (comes default with Ubuntu 18.04)
-* Ubuntu 18.04.x Installer - Wowza 4.7.7    / Oracle Java JDK 8u202
-
-* CentOS 7.7.1908 Installer - Wowza 4.8.0   / Oracle Java JDK java-11-openjdk-11.0.7.10-4.el7_8.x86_64
-* CentOS 7.6 Installer - Wowza 4.7.7        / Oracle Java JDK 8u202
