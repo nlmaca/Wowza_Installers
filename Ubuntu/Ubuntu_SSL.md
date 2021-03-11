@@ -1,4 +1,4 @@
-# Letsencrypt Wowza (CentOS 7) 
+# Letsencrypt Wowza (Ubuntu) 
 Date: 2020-02-19
 Author: J. van Marion / jeroen@vanmarion.nl
 Version: 2.0
