@@ -1,4 +1,6 @@
 # Letsencrypt Wowza (Ubuntu) 
+Date: 2021-03-29 / Updated v0.2 .jar url from Robymus 
+
 Date: 2020-02-19
 Author: J. van Marion / jeroen@vanmarion.nl
 Version: 2.0
@@ -74,9 +76,9 @@ sudo certbot certonly --standalone -d YOUR-WOWZASERVER-DOMAINNAME
 
 ```
 cd /usr/local/WowzaStreamingEngine/lib 
-wget https://github.com/robymus/wowza-letsencrypt-converter/releases/download/v0.1/wowza-letsencrypt-converter-0.1.jar
+wget https://github.com/robymus/wowza-letsencrypt-converter/releases/download/v0.2/wowza-letsencrypt-converter-0.2.jar
 
-java -jar wowza-letsencrypt-converter-0.1.jar -v /usr/local/WowzaStreamingEngine/conf/ /etc/letsencrypt/live/
+java -jar wowza-letsencrypt-converter-0.2.jar -v /usr/local/WowzaStreamingEngine/conf/ /etc/letsencrypt/live/
 
 # 2 files should have been created. a .jks and a .txt file. Read the txt file and copy the contents in a temporary notepad
 

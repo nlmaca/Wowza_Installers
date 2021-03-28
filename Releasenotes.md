@@ -1,3 +1,8 @@
+## Update 2021-03-29
+- Changed .jar url to version 0.2 in Ubuntu and CentOS SSL installers
+- added Ubuntu 18.04 / 20.04 Walkthrough installer for upgrading tot 4.8.11 
+- Before upgrading to 4.8.11 make sure you have Java 9 or 11 installed!
+
 ## Update 2021-02-19
 - Updated Ubuntu 18.04 + 20.04 LTS Upgrade wowza with or without java upgrade
 - Updated Ubuntu SSL installatation
