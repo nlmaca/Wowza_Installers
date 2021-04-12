@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# Date: 2021-03-28
+# Date: 2021-04-12
 # Author: J. van Marion / jeroen@vanmarion.nl
 # Version: 1.0
+# Type: auto installer/updater
 
 # Requirements
-- Java 9+ or 11 installed
-- SSL optional
+#- Java 9+ or 11 installed
+#- SSL optional
+# At least version 4.8.9 is required. If you are running on a older version update to 4.8.9 first!!
 
 # Some notes
-* This upgrade will NOT remove your current Java version.
-* This upgrade does NOT contain a java Update. So if you are still running on Java version below 9, you need to upgrade Java first!
-* The Wowza update can be downloaded from the wowza site. For convenience i added it to my website. If you don't trust that, change the download link to your choice to receive the update file. You can find it in your wowza (account) download section. 
-* This installer is a walkthrough. 
+#* This upgrade will NOT remove your current Java version.
+#* This upgrade does NOT contain a java Update. So if you are still running on Java version below 9, you need to upgrade Java first!
+#* The Wowza update can be downloaded from the wowza site. For convenience i added it to my website. If you don't trust that, change the download link to your choice to receive the update file. You can find it in your wowza (account) download section. 
+ 
 
 # run as root or as sudo (user needs to be present in visudo)
 # sshUser ALL=(ALL:ALL)ALL
@@ -47,25 +49,9 @@ sudo bash update.sh
 # This will update your installation to : Wowza Streaming Engine 4.8.11+5 - Build 20210322205002
 # Are you sure you want to continue? (y/n)
 
-some install information you will see
-```
-Press Enter to continue.
-
-Detected operating system: linux
-Checking file versions.
-Backing up current files.
-Successfully created backup: /usr/local/WowzaStreamingEngine-4.8.8.01/updates/backup/4.8.11+5.zip
-Updating installation.
-The update process completed successfully.
-Keep a copy of this update zipfile.  It is needed in case you want to restore to the previous version.
-Only this version of the update will restore the prior version replaced by this update.
-
-```
-and you'r done. Now lets restart the services again. 
-
 echo "Restart wowza services"
 #and restart everything
-clear
+
 echo "restart wowza services"
 sleep 1
 sudo service WowzaStreamingEngine restart

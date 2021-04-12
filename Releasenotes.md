@@ -1,3 +1,7 @@
+## update 2021-04-12
+- Added 4.8.11 upgrade installers for ubuntu 18.04 and ubuntu 20.04
+- important: make sure you have updated to 4.8.9 first (if not your installattion will most likely result in an error 500)
+
 ## Update 2021-03-29
 - Changed .jar url to version 0.2 in Ubuntu and CentOS SSL installers
 - added Ubuntu 18.04 / 20.04 Walkthrough installer for upgrading tot 4.8.11 
