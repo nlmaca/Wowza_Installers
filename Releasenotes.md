@@ -1,3 +1,6 @@
+## update 2021-05-04
+* Added Ubuntu 20.04 upgrade script for upgrading to 4.8.12+1
+
 ## update 2021-04-12
 - Added 4.8.11 upgrade installers for ubuntu 18.04 and ubuntu 20.04
 - important: make sure you have updated to 4.8.9 first (if not your installattion will most likely result in an error 500)
