@@ -19,7 +19,7 @@
 # NOTE: 
 # when adding a domainname to your server, make sure to add the domainname to your /etc/hosts file otherwise the wowza enginemanager won't let you login
 
-echo "Install Java 11 + Wowza Streaming Engine 4.8.15+1 including CSF Firewall"
+echo "Install Java 11 + Wowza Streaming Engine 4.8.15+3 including CSF Firewall"
 #update 
 clear
 echo "update your system"

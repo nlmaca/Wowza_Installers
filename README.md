@@ -23,7 +23,7 @@ The installers are complete scripts which install all the components needed:
 Second part is you can run your wowza server on a letsencrypt SSL. Although StreamLock from Wowza is also possible (and free of charge now). That was paid before, so that's why i chose for LetsEncrypt.
 - You can choose to run only the frontend on SSL or the backend, or both.
 - SSL encryption will cause a higher cpu load on your server due to the encryption of the stream. I can't tell you what the load will be, that all depends on your streaming setup and connections.
-- If you want to add SSL to your server [read this section](/Ubuntu_SSL.md)
+- If you want to add SSL to your server [read this section](https://github.com/nlmaca/Wowza_Installers)
 
 ## Todo: 
 - upgrade installers and how to restore (in case of update failure)
