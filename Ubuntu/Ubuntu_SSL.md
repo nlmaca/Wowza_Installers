@@ -1,8 +1,8 @@
 # Letsencrypt Wowza (Ubuntu) 
-Date: 2021-03-29 / Updated v0.2 .jar url from Robymus 
+Date: 2021-03-29 / Updated v0.2 .jar url from [Robymus](https://github.com/robymus/wowza-letsencrypt-converter)
 
 Date: 2020-02-19
-Author: J. van Marion / jeroen@vanmarion.nl
+Author: J. van Marion 
 Version: 2.0
 - Certbot-auto EOL. New install method via snap
 - This setup will enable SSL on your Frontend and Backend!

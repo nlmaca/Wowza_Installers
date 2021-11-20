@@ -1,3 +1,8 @@
+
+## update 2021-11-19
+* Added Ubuntu 20.04 fresh installer for Wowza version 4.8.15+3
+* changed Wowza download url back to wowza official URL
+
 ## update 2021-05-04
 * Added Ubuntu 20.04 upgrade script for upgrading to 4.8.12+1
 * Added Ubuntu 20.04 fresh installer script for wowza version 4.8.12+1
