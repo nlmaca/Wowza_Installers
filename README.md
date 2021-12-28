@@ -1,3 +1,13 @@
+
+# Important!! 
+* Log4j security patch release: CVE-2021-44832 dec 28 2021
+* will also fix: CVE-2021-44228 & CVE-2021-45046
+* Check Ubuntu/Patches/Log4jSecurityFix_2.17.1.sh
+
+* use at own risk. Always, always test on your test environment first!
+
+* CentOS installer in progress
+
 # Intro
 I got tired of running the same commands over and over again when i was testing with wowza. So i made some installers for it. I mainly focus on Ubuntu setups, although i also try to maintain the CentOS distro (when requested).
 
