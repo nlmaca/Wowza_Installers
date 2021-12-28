@@ -3,6 +3,12 @@
 * Log4j security patch release: CVE-2021-44832 dec 28 2021
 * will also fix: CVE-2021-44228 & CVE-2021-45046
 * Check Ubuntu/Patches/Log4jSecurityFix_2.17.1.sh
+* references: 
+```
+https://www.wowza.com/docs/update-for-apache-log4j2-security-vulnerability
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44832
+https://logging.apache.org/log4j/2.x/
+```
 
 * use at own risk. Always, always test on your test environment first!
 

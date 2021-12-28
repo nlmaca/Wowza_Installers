@@ -15,9 +15,10 @@
 # https://logging.apache.org/log4j/2.x/
 
 # Requirements: Wowza version higher than 4.8.8.01
-# This will impact all log4j files o
-# This will replace the log4j-core jar file in the wowza configuration
-# log4j-core-2.17.0.jar
+# This will impact all log4j files
+# This will replace the log4j-core*.jar and log4j-api*.jar file in the wowza configuration
+# log4j-core-2.17.1.jar
+# log4j-api-2.17.1.jar
 
 # run as root
 
