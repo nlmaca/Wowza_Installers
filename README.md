@@ -11,7 +11,6 @@ https://logging.apache.org/log4j/2.x/
 ```
 
 * use at own risk. Always, always test on your test environment first!
-
 * CentOS installer in progress
 
 # Intro

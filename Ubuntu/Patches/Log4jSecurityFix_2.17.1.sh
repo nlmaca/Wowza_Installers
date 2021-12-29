@@ -20,7 +20,7 @@
 # log4j-core-2.17.1.jar
 # log4j-api-2.17.1.jar
 
-# run as root
+# run as root or with sudo
 
 cd /tmp
 echo "Remove old zipfile if exists"

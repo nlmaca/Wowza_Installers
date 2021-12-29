@@ -1,4 +1,11 @@
 
+## update 2021-12-29
+* Log4j security patch release: CVE-2021-44832 dec 28 2021
+* will also fix: CVE-2021-44228 & CVE-2021-45046
+* Added Ubuntu/Patches/Log4jSecurityFix_2.17.1.sh
+
+* Added Ubuntu 20.04 fresh installer for Wowza version 4.8.17+1
+
 ## update 2021-11-19
 * Added Ubuntu 20.04 fresh installer for Wowza version 4.8.15+3
 * changed Wowza download url back to wowza official URL
