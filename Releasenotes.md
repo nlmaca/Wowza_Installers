@@ -1,4 +1,9 @@
 
+## UPdate 2022-03-12
+* Log4jupdate Fix version
+* replaced url for Log4j2.17.2 file (2.17.1 file was remove from original url)
+
+
 ## update 2021-12-29
 * Log4j security patch release: CVE-2021-44832 dec 28 2021
 * will also fix: CVE-2021-44228 & CVE-2021-45046
