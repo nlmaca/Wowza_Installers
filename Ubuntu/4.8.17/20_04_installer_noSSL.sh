@@ -3,7 +3,7 @@
 # Date                              : 2021-12-29
 # Author                            : J. van Marion / jeroen@vanmarion.nl
 # Version                           : 1.0
-# Wowza latest production release   : Wowza Streaming Engine 4.8.15+3 build 20211022114044 released on 21/12/2021
+# Wowza latest production release   : Wowza Streaming Engine 4.8.17+
 # Release notes                     : https://www.wowza.com/docs/wowza-streaming-engine-4-8-17-release-notes
 # OS version                        : Ubuntu 20.04.3 LTS
 
