@@ -169,7 +169,7 @@ echo "see below for the url to login to wowza"
 sleep 2
 
 echo "Make sure to reboot your server to check if everything is working"
-echo "Your wowza instance can be reached at: http://$CURRENT_IP":8088/enginemanager"
+echo "Your wowza instance can be reached at: http://$CURRENT_IP:8088/enginemanager"
 
 echo "## installation is done"
 echo "In wowza EngineManager check Server > About and check if the Java version is version 17."

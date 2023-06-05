@@ -1,4 +1,8 @@
 
+## Update 2023-06-05
+* Setup new installer for Ubuntu server, OpenJDK17 and CSF. Part 1 of many
+* Created installer script Ubuntu/01_InstallStreamingEngine.sh
+
 ## UPdate 2022-03-12
 * Log4jupdate Fix version
 * replaced url for Log4j2.17.2 file (2.17.1 file was remove from original url)

@@ -1,56 +1,78 @@
 
-# Important!! 
-* Log4j security patch release: CVE-2021-44832 dec 28 2021
-* will also fix: CVE-2021-44228 & CVE-2021-45046
-* Check Ubuntu/Patches/Log4jSecurityFix_2.17.2.sh
-* references: 
-```
-https://www.wowza.com/docs/update-for-apache-log4j2-security-vulnerability
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44832
-https://logging.apache.org/log4j/2.x/
-```
-
-* use at own risk. Always, always test on your test environment first!
-* CentOS installer in progress
-
 # Intro
-I got tired of running the same commands over and over again when i was testing with wowza. So i made some installers for it. I mainly focus on Ubuntu setups, although i also try to maintain the CentOS distro (when requested).
 
-## Prerequisites - (free) wowza account
-* Update november 19 2021: https://vanmarion.nl/blog/blog/wowza-changed-developer-license-model/
-* Create a free account at wowza. After that login and then open this url: https://www.wowza.com/pricing/trial
-* Wowza has changed their developer licenses from 180 days to 30 days. You can however request a renewal trial after the 30 days end.
-* The trial license is valid for all Versions. 
-* If you have an enterprise license, you can use that one. Check with Wowza Support if your license is valid for the next version.
-* You have a default installed Ubuntu 20.04.x server installed
+I have created several installers and decided it was time for an upgrade. I will be updating this page with new installers. 
 
-# Server Installers 
-The installers are complete scripts which install all the components needed:
-- Java 11 Installation
-- CSF Firewall Including the correct ports
-- Wowza Server Installation (all you need to fill in is the LicenseKey and your preferred login credentials for the backend of Wowza)
-- Check the installers for the wowza version you would like to install.
+More information can be found at https://www.vanmarion.nl/blog where i also explain the installer scripts
+
+## Update
+
+Last update: june 5, 2023
+
+## Installers
+
+- June 5,2023   : Fresh Install Wowza StreamingEngine /Ubuntu/01_InstallStreamingEngine.sh
+                : Blog post: https://vanmarion.nl/blog/blog/wowza-streaming-engine-4-8-232-java-openjdk-17/
+- TBA           : Upgrade OpenJDK 11 to OpenJDK 17 including upgrade to Wowza 4.8.23+2
+                : Blog post: TBA
+- TBA           : Additional installation of LetsEncrypt SSL for Wowza frontend & Backend
+                : Blog post: TBA
+- TBA           : Additional configuration of adding StreamLock
+                : Blog post: TBA
+- TBA           : Playback example with VideoJS or Wowza Jwplayer (Free Cloud edition)
+                : Blog post: TBA
+
+## Hardware
+
+* For testing purposed i use a simple VM in VMware workstation or on my own server. 
+* 1CPU/vCore, 4GB of RAM, 20 GB of harddisk is enough for testing purposes. 
+
+## What does the installer(s) contain
+
+* Fresh installation of Wowza StreamingEngine 4.8.23+2 
+* OpenJDK 17 installation
+* CSF Firewall installation including configuration
+
+## What do you need?
+
+- A fresh installed Ubuntu 20 or 22.04 LTS version installed with a normal user. 
+- A free trial (30 days valid) from Wowza. You can do this by register for free at https://portal.wowza.com/
+- Create a new trial license for Wowza Streaming Engine. 
+- In case you also want to enable SSL you will also need a public domain and ports 80 and 443 needs to be routed to your Wowza Server. 
+
+# What do the installers contain
+
+- Java installations and configuration
+- Updates to newer java versions
+- Installation and automatic configuration of the firewall
 
 # Upgrade installers
-- Normally you can download the upgrade zip from your wowza account. I added the zip to my personal domain. If you don't trust that, just change the download url in the wget command.
+- Normally you can download the upgrade zip from your wowza account, but i cannot add them to the installation scripts. So I add the zip to my personal domain. If you don't trust that, just change the download url in the wget command in the bash script. 
+
+# CSF Firewall
+
+I usually use CSF for firewall rules. More information can be found at https://configserver.com/configserver-security-and-firewall/ in case you want to know more detail.
+
+
+# SSL certificates
+
+## LetsEncrypt
+
+I started with LetsEncrypt as an alternative to Streamlock which was a paid addition a couple of years ago. And it was a nice challenge. I found another use on Github wich has created a converter so i was able to install it to Wowza and could create a manual for it. 
+
+## Streamlock 
+
+Wowza supports Streamlock, but it is only usefull for production servers. With every change in License you have to reset/activate it again. I am planning on making a tutorial, but i focus on the LetsEncrypt first. 
 
 # SSL Frontend & Backend
-Second part is you can run your wowza server on a letsencrypt SSL. Although StreamLock from Wowza is also possible (and free of charge now). That was paid before, so that's why i chose for LetsEncrypt.
-- You can choose to run only the frontend on SSL or the backend, or both.
-- SSL encryption will cause a higher cpu load on your server due to the encryption of the stream. I can't tell you what the load will be, that all depends on your streaming setup and connections.
-- If you want to add SSL to your server [read this section](https://github.com/nlmaca/Wowza_Installers)
 
-## Todo: 
-- upgrade installers and how to restore (in case of update failure)
-- upgrade java 8 to java 11 only on existing system
+With the frontend i mean the EngineManager website where you as the WowzaAdmin login to. 
+With the backend i mean the API access or the stream Url's.
+You can choose if you want to connect both to SSL or only one. 
 
-
-## What will be installed
-* system will be updated & upgraded
-* Java 11 will be installed and connected to Wowza
-* Basic Wowza Streaming Engine will be installed
-* CSF (Firewall) be installed & automatic configured with the ports needed including your ssh port
-
+# Important
+Be Aware that streaming over SSL can cause the serverload to increase with 20 - 50%. There is some SSL optimization where Wowza wrote an article about. This is not in scope in the installer, but for you to investigate in case you run into serverload issues. 
+More info: https://www.wowza.com/docs/how-to-improve-ssl-configuration#modify-your-ssl-configuration-settings3
 
 ## The CSF (Firewall) part below will be the same in all installers.
 
@@ -69,9 +91,9 @@ Port 1935	    : RTMP (all variants), RTSP, Microsoft Smooth Streaming, Apple HLS
 Port 8084-8085  : JMX/JConsole monitoring and administration
 Port 8086-8087  : HTTP Administrator
 Port 8088		: Wowza Streaming Engine Manager
-Port 8090       : if you decide to use Wowza SSL
+Port 8090       : Preparation for SSL setup (EngineManager)
 Port 554		: RTSP
-Port 443		: SSL Connections
+Port 443		: Preparation for SSL setup (StreamingEngine)
 Port 80		    : Licensing server connections / 
 
 #CSF IPV4
