@@ -34,14 +34,14 @@ clear
 echo "update your system"
 sleep 2
 
-apt -y update && apt -y upgrade
+sudo apt -y update && apt -y upgrade
 
 #install java
 clear
 echo "install Java 17"
 sleep 2
 
-apt -y install openjdk-17-jdk
+sudo apt -y install openjdk-17-jdk
 
 echo "check java version"
 java -version
@@ -63,7 +63,7 @@ export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")" >> /etc/prof
 
 
 #run the file
-source /etc/profile.d/jdk17.sh
+sudo source /etc/profile.d/jdk17.sh
 
 #install Wowza
 #keep your license key ready. its needed in this installer
@@ -71,8 +71,8 @@ clear
 echo "time to download wowza"
 sleep 2
 cd /tmp
-wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-8-23+2/WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
-chmod +x WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
+sudo wget https://www.wowza.com/downloads/WowzaStreamingEngine-4-8-23+2/WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
+sudo chmod +x WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
 
 #run installer
 clear
@@ -81,7 +81,7 @@ echo "You have to press ENTER several times to get through the License agreement
 echo "You also have to set a uername and password"
 echo "The installation starts in 5 seconds"
 sleep 5
-./WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
+sudo ./WowzaStreamingEngine-4.8.23+2-linux-x64-installer.run
 
 #agree to agreement by pressing enter multiple times | Press [Enter] to continue:
 # accept agreement	| Do you accept this agreement? [y/n]:
@@ -100,30 +100,30 @@ sleep 5
 clear
 echo "wowza is installed. Update the Java version for Wowza to use"
 sleep 2
-rm -rf /usr/local/WowzaStreamingEngine/java
-ln -sf /usr/lib/jvm/java-17-openjdk-amd64/ /usr/local/WowzaStreamingEngine/java
+sudo rm -rf /usr/local/WowzaStreamingEngine/java
+sudo ln -sf /usr/lib/jvm/java-17-openjdk-amd64/ /usr/local/WowzaStreamingEngine/java
 
 #and restart everything
 clear
 echo "restart wowza services"
 sleep 1
-service WowzaStreamingEngine restart
-service WowzaStreamingEngineManager restart
+sudo service WowzaStreamingEngine restart
+sudo service WowzaStreamingEngineManager restart
 
 #install csf firewall
 clear
 echo "CSF firewall be installed and configured"
 sleep 2
-ufw disable
+sudo ufw disable
 
-apt -y install libwww-perl
+sudo apt -y install libwww-perl
 cd /tmp
 wget https://download.configserver.com/csf.tgz
-tar -xzf csf.tgz
+sudo tar -xzf csf.tgz
 cd csf
-bash install.sh
+sudo bash install.sh
 
-perl /usr/local/csf/bin/csftest.pl
+sudo perl /usr/local/csf/bin/csftest.pl
 
 #firewall replace ports
 #get your current ssh port, which will be set in the firewall rules
@@ -146,10 +146,10 @@ sed -i 's/UDP_OUT.*/UDP_OUT = "53"/g' /etc/csf/csf.conf
 
 # CSF warning: *WARNING* Binary location for [SENDMAIL] [/usr/sbin/sendmail] in /etc/csf/csf.conf is either incorrect, is not installed or is not executable
 echo '#!/bin/sh' > /usr/sbin/sendmail
-chmod +x /usr/sbin/sendmail
+sudo chmod +x /usr/sbin/sendmail
 
 # CSF warning: *WARNING* Binary location for [UNZIP] [/usr/bin/unzip] in /etc/csf/csf.conf is either incorrect, is not installed or is not executable
-apt -y install zip unzip
+sudo apt -y install zip unzip
 
 # restart firewall
 echo "CSF firewall installed. Restart firewall services to save changes"
@@ -157,8 +157,8 @@ sleep 2
 csf -r
 
 # Restart wowza services again
-service WowzaStreamingEngine restart
-service WowzaStreamingEngineManager restart
+sudo service WowzaStreamingEngine restart
+sudo service WowzaStreamingEngineManager restart
 
 # Add Wowza Log4j update patch
 
