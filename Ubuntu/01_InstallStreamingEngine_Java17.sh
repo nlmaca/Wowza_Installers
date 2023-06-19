@@ -34,7 +34,8 @@ clear
 echo "update your system"
 sleep 2
 
-sudo apt -y update && apt -y upgrade
+sudo apt update -y
+sudo apt upgrade -y
 
 #install java
 clear

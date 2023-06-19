@@ -1,3 +1,8 @@
+## update 2023-06-18
+* Added installation including SSL configuration for 4.8.23+2
+* Added update installer for Wowza 4.8.23+2
+* Added fresh installer for Wowza 4.8.23+2
+* Added upgrade Custom Java 11.0.2 for 4.8.23+2
 
 ## Update 2023-06-05
 * Setup new installer for Ubuntu server, OpenJDK17 and CSF. Part 1 of many
