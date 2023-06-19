@@ -1,48 +1,40 @@
-#!/bin/bash
+# Letsencrypt Wowza (Ubuntu) 
+Date: 2021-03-29 / Updated v0.2 .jar url from [Robymus](https://github.com/robymus/wowza-letsencrypt-converter)
 
-# Date                              : 2023-06-18
-# Author                            : J. van Marion / jeroen@vanmarion.nl
-# Version                           : 1.1
-# Wowza latest production release   : Wowza Streaming Engine 4.8.23+2
-# Release notes                     : https://www.wowza.com/docs/wowza-streaming-engine-4-8-17-release-notes
-# OS version                        : Ubuntu 22.04.2 LTS
+Date: 2020-02-19
+Author: J. van Marion 
+Version: 2.0
+- Certbot-auto EOL. New install method via snap
+- This setup will enable SSL on your Frontend and Backend!
 
-# Requirements: Wowza StreamingEngine 4.8.23+2 installed
-# run as root or with sudo privileges
-# a DNS adress like wowza.vanmarion.nl so we can enable SSL
-# Open Firewall ports: 80,443,8090 (TCP/IN)
-# If you ran the installer from my tutorial, SSL is already pre-configured in CSF.
+# Requirements
+- You should have setup a basic server with an ipaddress and a valid domainname forwarded to the server. 
+- Wowza version: 4.8.+ present on your system
+- Firewall ports 80,443,8090(for backend) should be open on your server to validate the SSL request. 
 
-# run installation as sudo:
-# bash 04_Wowza_SSL.sh
-
-echo "In order to enable and configure SSL you need to provide a valid DNS name that points to your wowza server (example: vps.vanmarion.nl):"
-
-read domainname
-
-if [ -z "$domainname" ]
-then 
-    echo "\$domainname is empty. Please enter a valid domainname"
-else
-    echo "We will continue the setup with:" $domainname
-fi
-
-echo "Installing SNAP" 
-sleep 2
+# Firewall Ports
+- If you need to setup a complete server, please check out the installer files for your setup
+- If you have your own firewall setup please be aware to open Inbound ports: 80, 443, 8090, 1935
+```
+80 and 443 are needed to validate the SSL certificate
+8090 is the port we will use for our backend connection
+1935 is the default streaming port for Wowza playback
+```
+  
+# CLI commands
+- Open a shell prompt to your Wowza Server and run the commands. 
+- Only replace YOUR-WOWZASERVER-DOMAINNAME with your domainname you use for your wowza server. 
+```
+# update and upgrade your server
+sudo apt-get update && apt-get upgrade
 
 # install snap
 sudo apt install snapd -y
 sudo systemctl enable --now snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
 
-echo "Remove certbot and certbot packages" 
-sleep 2
-
 # remove certbot-auto and Certbot packages
 sudo apt remove certbot
-
-echo "Install classic certbot using SNAP and create a symlink"
-sleep 2
 
 # install certbot
 sudo snap install --classic certbot
@@ -56,7 +48,7 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 # create the SSL certificate. Change YOUR-WOWZASERVER-DOMAINNAME to your domain
 
-sudo certbot certonly --standalone -d $domainname --key-type rsa
+sudo certbot certonly --standalone -d YOUR-WOWZASERVER-DOMAINNAME --key-type rsa
 
 # Answer some of the questions:
 # enter email: set-your-email
@@ -77,17 +69,16 @@ sudo certbot certonly --standalone -d $domainname --key-type rsa
 #   certificates, run "certbot renew"
 # - If you like Certbot, please consider supporting our work by:
 
+```
 # SSL converter 
-#- Convert the SSL certificate so we can use it in Wowza. Letsencrypt converter (creation JKS file). 
-#- Credits to Robymus: https://github.com/robymus
+- Convert the SSL certificate so we can use it in Wowza. Letsencrypt converter (creation JKS file). 
+- Credits to Robymus: https://github.com/robymus
 
-echo "Download and install the Wowza Letsencrypt converter from Robymus" 
-sleep 2
-
+```
 cd /usr/local/WowzaStreamingEngine/lib 
-sudo wget https://github.com/robymus/wowza-letsencrypt-converter/releases/download/v0.2/wowza-letsencrypt-converter-0.2.jar
+wget https://github.com/robymus/wowza-letsencrypt-converter/releases/download/v0.2/wowza-letsencrypt-converter-0.2.jar
 
-sudo java -jar wowza-letsencrypt-converter-0.2.jar -v /usr/local/WowzaStreamingEngine/conf/ /etc/letsencrypt/live/
+java -jar wowza-letsencrypt-converter-0.2.jar -v /usr/local/WowzaStreamingEngine/conf/ /etc/letsencrypt/live/
 
 # 2 files should have been created. a .jks and a .txt file. Read the txt file and copy the contents in a temporary notepad
 

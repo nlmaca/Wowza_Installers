@@ -1,3 +1,6 @@
+## update 2023-06-19
+* Cleanup old files and installers to archive. 
+
 ## update 2023-06-18
 * Added installation including SSL configuration for 4.8.23+2
 * Added update installer for Wowza 4.8.23+2
